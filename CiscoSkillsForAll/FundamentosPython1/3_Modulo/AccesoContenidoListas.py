@@ -1,7 +1,8 @@
-#print(numbers[0]) # Accediendo al primer elemento de la lista.
+
 numbers = [10, 5, 7, 2, 1]
 print("Contenido de la lista original:", numbers)  # Imprimiendo el contenido de la lista original.
 
+print(numbers[0]) # Accediendo al primer elemento de la lista.
 numbers[0] = 111
 print("\nContenido de la lista con cambio:", numbers)  # Imprimiendo contenido de la lista con 111.
 
