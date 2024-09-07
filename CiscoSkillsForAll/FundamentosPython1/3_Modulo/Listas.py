@@ -1,3 +1,4 @@
+# LISTA: es una colección de elementos, pero cada elemento es un escalar.
 numbers = [10, 5, 7, 2, 1]
 print("Contenido de la lista:", numbers)  # Imprimiendo contenido de la lista original.
 
