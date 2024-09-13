@@ -17,4 +17,16 @@ for number in lst:  # Ciclo for que tomara los numero de lst
     lst_2.append(add) # Coloca la suma al final de la lista
 
 print(lst_2) # Imprime lst2
-#
+# ¿Cuál es el resultado del siguiente fragmento de código?
+lst = [] # Lista
+del lst # Eliminacion de lst
+print(lst) #Imprimir lst (Ya no existe en los registros)
+# NameError: name 'lst' is not defined
+
+# ¿Cuál es el resultado del siguiente fragmento de código?
+lst = [1, [2, 3], 4]
+print(lst[1])
+print(len(lst))
+
+
+
