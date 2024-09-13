@@ -27,6 +27,9 @@ print(lst) #Imprimir lst (Ya no existe en los registros)
 lst = [1, [2, 3], 4]
 print(lst[1])
 print(len(lst))
+# [2, 3]
+# 3
+
 
 
 
