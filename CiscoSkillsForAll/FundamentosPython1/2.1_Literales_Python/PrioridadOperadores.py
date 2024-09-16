@@ -1,5 +1,5 @@
-//Prioridades de Operadores en Python
-// ** -> +,- (unarios) -> * , / , // , % -> + , - (binarios)
+#Prioridades de Operadores en Python
+# ** -> +,- (unarios) -> * , / , // , % -> + , - (binarios)
 
 print(2 * 3 % 5)
 
