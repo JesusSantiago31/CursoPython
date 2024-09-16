@@ -1,1 +1,0 @@
-En este apartado encontraremos algunas librerias que se pueden utilizar en el lenguaje de programacion python
