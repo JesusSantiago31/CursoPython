@@ -1,35 +1,35 @@
-//  Operadores en Python + - * / // % **
-  //Multiplicacion
+# Operadores en Python + - * / // % **
+  # Multiplicacion
 print(2 ** 3)
 print(2 ** 3.)
 print(2. ** 3)
 print(2. ** 3.)
-  //DIvision Flotante
+  # DIvision Flotante
 print(6 / 3)
 print(6 / 3.)
 print(6. / 3)
 print(6. / 3.)
-  //Division Entera (Redondea el resultado)
-print(6 // 3) //Arroja un entero
-print(6 // 3.) //Arroja un flotante 
+  # Division Entera (Redondea el resultado)
+print(6 // 3) # Arroja un entero
+print(6 // 3.) # Arroja un flotante 
 print(6. // 3)
 print(6. // 3.)
 
   
-print(6 // 4)  //Arroja un entero
-print(6. // 4) //Arroja un flotante 
+print(6 // 4)  # Arroja un entero
+print(6. // 4) # Arroja un flotante 
 
 print(-6 // 4)
 print(6. // -4)
 
-//Residuo 
+# Residuo 
 print(14 % 4)
 
-//Suma
+#Suma
 print(-4 + 4)
 print(-4. + 8)
 
-//Resta
+#Resta
 print(-4 - 4)
 print(4. - 8)
 print(-1.1)
