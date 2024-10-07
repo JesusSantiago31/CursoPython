@@ -20,7 +20,7 @@ for i in range(100):
   
 for i in range(10):
     print("El valor de i es", i)
-
+        
 #La funcion range puede tener dos argumentos
 for i in range(2, 8):
     print("El valor de i es", i)
