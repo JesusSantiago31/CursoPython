@@ -16,3 +16,4 @@ print("Longitud de la nueva lista:", len(numbers))  # Imprimiendo nueva longitud
 print("\nNuevo contenido de la lista:", numbers)  # Imprimiendo el contenido de la lista actual.
 
 ###
+  
