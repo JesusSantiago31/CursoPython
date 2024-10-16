@@ -10,7 +10,7 @@ flag_register &= ~the_mask
 flag_register = flag_register | the_mask
 flag_register |= the_mask
 
-#Niega tu bit
+#Niega tu bit    
 flag_register = flag_register ^ the_mask
 flag_register ^= the_mask
 
