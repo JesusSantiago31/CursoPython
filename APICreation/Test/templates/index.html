@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejecutar Scripts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        button {
+            font-size: 16px;
+            padding: 10px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        #output {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+            white-space: pre-wrap;
+            text-align: left;
+        }
+        #error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ejecutar Scripts</h1>
+
+    <button onclick="ejecutarScript('archivo1.py')">Ejecutar Script 1</button>
+    <button onclick="ejecutarScript('script2.py')">Ejecutar Script 2</button>
+
+    <div id="output"></div>
+    <div id="error"></div>
+
+    <script>
+        function ejecutarScript(scriptName) {
+            fetch(`/ejecutar/${scriptName}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.output) {
+                        document.getElementById('output').innerText = "Resultado:\n" + data.output;
+                        document.getElementById('error').innerText = "";
+                    } else if (data.error) {
+                        document.getElementById('error').innerText = "Error: " + data.error;
+                        document.getElementById('output').innerText = "";
+                    }
+                })
+                .catch(err => {
+                    document.getElementById('error').innerText = "Hubo un problema con la solicitud.";
+                    document.getElementById('output').innerText = "";
+                });
+        }
+    </script>
+</body>
+</html>
