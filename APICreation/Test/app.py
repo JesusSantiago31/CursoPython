@@ -25,3 +25,7 @@ def ejecutar(script_name):
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+@app.route("/logistic_regression", methods=["GET", "POST"])
+def logistic_regresion():
+    return render_template("logistic_regression.html")
