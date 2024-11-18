@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regresion Logistica</title>
+</head>
+<body>
+    
+
+    <div>
+        <h1>Regresion Logistica</h1>
+    </div>
+    <div>
+        <p>En este ejecicio se muestra los fundamentos de la regresión logística planteando uno de los primeros problemas que fueron solucionados mediante el uso de técnicas de Machine Learning: La detección de SPAM..}</p>
+        <p> Enunciado del ejercicio</p>
+        
+        Se propone la constricción de un sistema de aprendizaje automático, capaz de predecir si un correo determinado se corresponde con un correo SPAM o no, para ello se utilizará el siguiente conjunto de datos (DATASET)
+        2007 TREC Public Spam Corpus
+        
+        Use with the TREC 2007 spam evaluation toolkit.
+        
+        The corpus trec07p contains 75,419 messages:
+        
+        25220 ham
+        50199 spam
+        
+        These messages constitute all the messages delivered to a particular server between these dates:
+        
+        Sun, 8 Apr 2007 13:07:21 -0400
+        Fri, 6 Jul 2007 07:04:53 -0400
+        
+        </div>
+
+    <div >
+    <h2>Ejecutar Todo</h2>
+    <button onclick="ejecutarScript('archivo5.py')" id="btnScript5">Regresión Logística</button>
+    <button onclick="ejecutarScript('RAWformat.py')" id="btnScript5">HTML formato RAW</button>
+    <button onclick="ejecutarScript('RAWformat.py')" id="btnScript5">HTML formato RAW</button>
+    </div>
+
+        
+    
+    
+
+    <div>
+        <div id="output"></div>
+        <div id="error"></div>
+    </div>
+    
+</body>
+<script>
+    function ejecutarScript(scriptName) {
+        fetch(`/ejecutarR/${scriptName}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.output) {
+                    document.getElementById('output').innerText = "Resultado:\n" + data.output;
+                    document.getElementById('error').innerText = "";
+                } else if (data.error) {
+                    document.getElementById('error').innerText = "Error: " + data.error;
+                    document.getElementById('output').innerText = "";
+                }
+            })
+            .catch(err => {
+                document.getElementById('error').innerText = "Hubo un problema con la solicitud.";
+                document.getElementById('output').innerText = "";
+            });
+    }
+</script>
+</html>
