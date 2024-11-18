@@ -10,11 +10,24 @@
             text-align: center;
             padding: 20px;
         }
+        
         button {
             font-size: 16px;
             padding: 10px;
             margin: 10px;
             cursor: pointer;
+        }
+
+        .header{
+            background-color: rgb(55, 140, 237);
+        }
+
+        .buttons{
+            background-color: aquamarine;
+        }
+
+        .out{
+            background-color: beige;
         }
         #output {
             margin-top: 20px;
@@ -32,14 +45,23 @@
     </style>
 </head>
 <body>
-    <h1>Ejecutar Scripts</h1>
+    <div class="header">
+        <h1>. : SIMULACION : .</h1>
+        <h2> EJecutar Cualquier SCRIPT </h2>
+    </div>
 
-    <button onclick="ejecutarScript('archivo1.py')">Ejecutar Script 1</button>
-    <button onclick="ejecutarScript('script2.py')" >Ejecutar Script 2</button>
+    <div class="buttons">
+    <button onclick="ejecutarScript('Archivo5.py')" id="btnScript5">Regresión Logística</button>
+    <button onclick="ejecutarScript('Archivo6.py')" id="btnScript6">Visualizacion de Datos</button>
+    <button onclick="ejecutarScript('Archivo7.py')" id="btnScript7">Preparación del DataSet</button>
+    <button onclick="ejecutarScript('Archivo8.py')" id="btnScript8">Creacion de Transformadores</button>
+    <button onclick="ejecutarScript('Archivo9.py')" id="btnScript9">Evaluacion de Resultados</button>
+    </div>
 
+    <div class="out">
     <div id="output"></div>
     <div id="error"></div>
-
+    </div>
     <script>
         function ejecutarScript(scriptName) {
             fetch(`/ejecutar/${scriptName}`)
