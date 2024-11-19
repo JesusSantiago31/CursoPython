@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejecutar Scripts</title>
+    <!-- Importar los estilos de Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            
+            background-color: #ffffff;
+            color: #f1faee;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-items: center;
+        }
+
+        h1, h2 {
+            margin: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 40px;
+        }
+
+        /* Cabecera */
+        .header {
+            width: 100%;
+            background: linear-gradient(to right, #5aa2cf, #2a1d57);
+            padding: 30px 0;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Contenedor de botones */
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        /* Botones */
+        .buttons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, #06d6a0, #118ab2);
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .buttons a i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+
+        .buttons a:hover {
+            background: linear-gradient(45deg, #118ab2, #06d6a0);
+            transform: scale(1.05);
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Diseño responsivo */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+
+            .buttons a {
+                font-size: 0.9rem;
+                padding: 15px;
+            }
+
+            .buttons a i {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>. : Simulación : .</h1>
+        <h2>¡Ejecuta el script de Machine Learning que desees!</h2>
+    </div>
+
+    <div class="buttons">
+        <a href="regresionLogistica"><i class="fas fa-chart-line"></i> Regresión Logística</a>
+        <a href="dataVisualization"><i class="fas fa-chart-pie"></i> Visualización de Datos</a>
+        <a href="datasetPreparations"><i class="fas fa-database"></i> Preparación del DataSet</a>
+        <a href="pipelineCreation"><i class="fas fa-cogs"></i> Creación de Transformadores</a>
+        <a href="resultsEvaluation1"><i class="fas fa-check-circle"></i> Evaluación de Resultados 1</a>
+        <a href="resultsEvaluation2"><i class="fas fa-balance-scale"></i> Evaluación de Resultados 2</a>
+    </div>
+</body>
+</html>

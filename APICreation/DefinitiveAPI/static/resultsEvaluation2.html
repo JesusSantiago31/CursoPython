@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results 2 Evaluation</title>
+    <link rel="stylesheet" href="static/css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="sidebar">
+        <a href="regresionLogistica"><i class="fas fa-chart-line"></i> Regresión Logística</a>
+        <a href="dataVisualization"><i class="fas fa-chart-pie"></i> Visualización de Datos</a>
+        <a href="datasetPreparations"><i class="fas fa-database"></i> Preparación del DataSet</a>
+        <a href="pipelineCreation"><i class="fas fa-cogs"></i> Creación de Transformadores</a>
+        <a href="resultsEvaluation1"><i class="fas fa-check-circle"></i> Evaluación de Resultados 1</a>
+        <a href="resultsEvaluation2"><i class="fas fa-balance-scale"></i> Evaluación de Resultados 2</a>
+    </div>
+
+    <div class="main-content">
+        <h2>Evaluación de Resultados 2</h2>
+        <div class="buttons">
+            <button onclick="fetchNotebookContent('10_Evaluacion_de_resultados_3501.ipynb')" id="btnScript5">
+                <i class="fas fa-play"></i> Ejecutar Todo
+            </button>
+            <button onclick="clean()" id="btnScriptClean">
+                <i class="fas fa-trash-alt"></i> Eliminar
+            </button>
+            <a href="/" class="btn-back">
+                <i class="fas fa-home"></i> Regresar a la Página Principal
+            </a>
+        </div>
+
+        <div id="notebook-content">
+            <h3>Contenido del notebook</h3>
+            <div id="content">Hola</div>
+        </div>
+    </div>
+
+    <script src="static/js/script.js"></script>
+</body>
+</html>
