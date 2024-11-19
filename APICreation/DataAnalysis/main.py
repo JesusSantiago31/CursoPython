@@ -38,23 +38,6 @@ def ejecutar(script_name):
 
 
 
-@app.route('/ejecutarR/<script_name>')
-def ejecutarR(script_name):
-    NEW_MODEL_PATH = os.path.join(os.getcwd(), "files/5files")
-    # Construir la ruta completa al script dentro del directorio "files"
-    script_path = os.path.join(NEW_MODEL_PATH, script_name)
-    
-    # Verificar si el script existe y tiene extensión .py
-    if os.path.exists(script_path) and script_path.endswith('.py'):
-        try:
-            # Ejecutar el script usando subprocess
-            result = subprocess.run(['python', script_path], capture_output=True, text=True)
-            return jsonify({'output': result.stdout, 'error': result.stderr})
-        except Exception as e:
-            return jsonify({'error': str(e)}), 500
-    else:
-        return jsonify({'error': 'Script no encontrado o inválido'}), 404
-
 
 
 

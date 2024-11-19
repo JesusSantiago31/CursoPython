@@ -1,7 +1,7 @@
 # REGRESION LOGÍSTICA 
 
 # En esta fase se facilita el preprocesamiento de correos electrónicos que poseen código HTML.
-
+print("\nLogistic Regression\n\n ")
 from html.parser import HTMLParser 
 DATASET_RELATIVE_PATH = "/home/jesusssc/Simulacion/files/datasets/datasets/trec07p/data/inmail.1"
 DATASET_FULL_INDEX_PATH = "/home/jesusssc/Simulacion/files/datasets/datasets/trec07p/full/index"
@@ -85,8 +85,8 @@ class Parser:
         return [self.stemmer.stem(w) for w in tokens if w not in self.stopwords]
 
 inmail = open(DATASET_RELATIVE_PATH).read()
+print(" \nCORREO ELECTRÓNICO .RAW \n")
 print(inmail)
-
 
 #/home/jesusssc/Simulacion/files/datasets/datasets/trec07p/data/inmail.1
 #files/datasets/datasets/trec07p/data/inmail.1
@@ -94,12 +94,12 @@ print(inmail)
 # Parsing del correo electrónico
 
 p = Parser()
-p.parse(DATASET_RELATIVE_PATH)
+print("\nPARSING DEL CORREO ELECTRÓNICO \n\n")
+print(p.parse(DATASET_RELATIVE_PATH))
 
 # Lectura de indices
 
 index = open(DATASET_FULL_INDEX_PATH ).readlines()
-index
 
 import os
 
@@ -122,7 +122,8 @@ def parse_email(index):
     return pmail, index["label"]
 
 indexes = parse_index(DATASET_FULL_INDEX_PATH,10)
-indexes
+print("\n\n         INDEXES \n\n")
+print(indexes)
 
 # Cargar el índice y las etiquetas en memoria
 index = parse_index(DATASET_FULL_INDEX_PATH, 1)
@@ -133,6 +134,7 @@ open(index[0]["email_path"]).read()
 
 # Parsear el primer correo
 mail, label = parse_email(index[0])
+print("\n\n         CLASIFICACION \n")
 print("El correo es: ", label ," \n")
 print(mail)
 
