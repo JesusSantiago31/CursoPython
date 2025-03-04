@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../static/styles.css">  
+    <title>Seleccionar Algoritmo</title>
+</head>
+<body>
+    <div class="container">
+    <h2>Seleccionar Algoritmo</h2>
+    <form action="/resultado" method="post">
+        Estado Inicial (Ej: 4,2,3,1): <input type="text" name="estado_inicial"><br>
+        Solución (Ej: 1,2,3,4): <input type="text" name="solucion"><br>
+        Método de búsqueda:
+        <select name="algoritmo">
+            <option value="BFS">Búsqueda en Amplitud (BFS)</option>
+            <option value="BFS_REC">Búsqueda en Amplitud Recursiva</option>
+            
+        </select><br>
+        <input id="button" type="submit" value="Enviar">
+    </form>
+    </div>
+    <hr>
+    <div class="container">
+    <h2>Buscar Vuelos</h2>
+    <form action="/buscar_vuelos" method="post">
+        Ciudad de Origen: <input type="text" name="ciudad_origen"><br>
+        Ciudad de Destino: <input type="text" name="ciudad_destino"><br>
+        <input id="button" type="submit" value="Buscar Vuelos">
+    </form>
+    </div>
+</body>
+</html>
