@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Grafo y Dijkstra</title>
+  <link rel="stylesheet" type="text/css" href="../static/styles.css">  
+  <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+</head>
+<body>
+
+  <h2>Algoritmo de Dijkstra</h2>
+  
+  <div class="container">
+    <div class="card">
+      <h4>Eliminar Grafo</h4>
+      <div class="form-group">
+        <button onclick="deleteGraph()">Eliminar Todo</button>
+      </div>
+    </div>
+    
+    <div class="card">
+      <h4>Agregar Nodo</h4>
+      <div class="form-group">
+        <input type="text" id="nodeName" placeholder="Nombre del nodo">
+        <button onclick="addNode()">Agregar Nodo</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h4>Agregar Arista</h4>
+      <div class="form-group form-row">
+        <input type="text" id="srcNode" placeholder="Nodo origen">
+        <input type="text" id="dstNode" placeholder="Nodo destino">
+        <input type="number" id="edgeWeight" placeholder="Peso">
+      </div>
+      <button onclick="addEdge()">Agregar Arista</button>
+    </div>
+
+    <div class="card">
+      <h4>Algoritmo de Dijkstra</h4>
+      <div class="form-group">
+        <input type="text" id="startNode" placeholder="Nodo inicial">
+        <input type="text" id="endNode" placeholder="Nodo destino (opcional)">
+        <button onclick="runDijkstra()">Ejecutar</button>
+      </div>
+      <pre id="result"></pre>
+    </div>
+
+    <div class="card">
+      <h4>Visualización del Grafo</h4>
+      <div id="network"></div>
+    </div>
+  </div>
+
+  <script>
+    let nodes = new vis.DataSet();
+    let edges = new vis.DataSet();
+    let network = new vis.Network(document.getElementById("network"), {nodes, edges}, {});
+
+    function refreshGraph() {
+      fetch('/dijkstra?start=') // para inicializar datos
+        .then(() => fetch('/graph.json'))
+        .then(res => res.json())
+        .then(graph => {
+          nodes.clear();
+          edges.clear();
+          graph.nodes.forEach(n => nodes.add({ id: n, label: n }));
+
+          let edgeId = 0;
+          for (let src in graph.edges) {
+            for (let dst in graph.edges[src]) {
+              edges.add({
+                id: `e${edgeId++}`,
+                from: src,
+                to: dst,
+                label: String(graph.edges[src][dst]),
+                color: { color: "#848484" }
+              });
+            }
+          }
+        });
+    }
+
+    function deleteGraph() {
+      if (confirm("¿Estás seguro de que deseas eliminar todo el grafo? Esta acción no se puede deshacer.")) {
+        fetch("/graph", {
+          method: "DELETE"
+        }).then(refreshGraph);
+      }
+    }
+
+    function addNode() {
+      const node = document.getElementById("nodeName").value;
+      fetch("/nodes", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({node})
+      }).then(refreshGraph);
+    }
+
+    function addEdge() {
+      const src = document.getElementById("srcNode").value;
+      const dst = document.getElementById("dstNode").value;
+      const weight = parseInt(document.getElementById("edgeWeight").value);
+      fetch("/edges", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({src, dst, weight})
+      }).then(refreshGraph);
+    }
+
+    function runDijkstra() {
+      const start = document.getElementById("startNode").value;
+      const end = document.getElementById("endNode").value;
+      let url = `/dijkstra?start=${start}`;
+      if (end) url += `&end=${end}`;
+
+      fetch(url)
+        .then(res => res.json())
+        .then(data => {
+          const result = document.getElementById("result");
+          result.innerHTML = "";
+
+          if (data.error) {
+            result.innerText = data.error;
+            return;
+          }
+
+          if (data.path && data.distance !== undefined) {
+            result.innerHTML = `
+              <strong>Distancia total:</strong> ${data.distance}<br>
+              <strong>Ruta:</strong> ${data.path.join(" → ")}
+            `;
+            highlightPath(data.path);
+          }
+
+          if (data.distances && data.paths) {
+            let html = `<table border="1"><thead><tr><th>Nodo</th><th>Distancia</th><th>Ruta</th></tr></thead><tbody>`;
+            for (let node in data.distances) {
+              const distancia = data.distances[node];
+              const ruta = data.paths[node].join(" → ");
+              html += `<tr>
+                        <td>${node}</td>
+                        <td>${distancia}</td>
+                        <td>${ruta}</td>
+                      </tr>`;
+            }
+            html += "</tbody></table>";
+            result.innerHTML += html; // Append the table to the result
+          }
+        })
+        .catch(error => {
+          console.error("Error ejecutando Dijkstra:", error);
+          document.getElementById("result").innerText = "Error ejecutando el algoritmo.";
+        });
+    }
+
+    function highlightPath(path) {
+      // Restaurar estilo por defecto
+      nodes.forEach(node => {
+        nodes.update({ 
+          id: node.id, 
+          color: { background: "#bbdefb", border: "#0a2b5c" } 
+        });
+      });
+
+      edges.forEach(edge => {
+        edges.update({ 
+          id: edge.id, 
+          color: { color: "#90caf9" }, 
+          width: 1 
+        });
+      });
+
+      // Resaltar nodos del camino
+      path.forEach(nodeId => {
+        nodes.update({ 
+          id: nodeId, 
+          color: { background: "#64b5f6", border: "#0d47a1" } 
+        });
+      });
+
+      // Resaltar aristas del camino
+      for (let i = 0; i < path.length - 1; i++) {
+        const from = path[i];
+        const to = path[i + 1];
+        const edgeToHighlight = edges.get({
+          filter: (e) => e.from === from && e.to === to
+        })[0];
+
+        if (edgeToHighlight) {
+          edges.update({
+            id: edgeToHighlight.id,
+            color: { color: "#0d47a1" },
+            width: 3
+          });
+        }
+      }
+    }
+
+    refreshGraph(); // Inicializa al cargar
+  </script>
+</body>
+</html>

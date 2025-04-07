@@ -1,0 +1,123 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: #f0f6ff;
+    color: #0a2b5c;
+  }
+  
+  h2 {
+    text-align: center;
+    color: #073b8b;
+  }
+  
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 100, 0.1);
+  }
+  
+  .card h4 {
+    margin-top: 0;
+    color: #073b8b;
+  }
+  
+  input[type="text"],
+  input[type="number"] {
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 100%;
+  }
+  
+  button {
+    background-color: #1976d2;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    margin-top: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #125ea9;
+  }
+  
+  #result {
+    background: #e3f2fd;
+    padding: 10px;
+    border-radius: 6px;
+    white-space: pre-wrap;
+    font-size: 14px;
+  }
+  
+  #network {
+    width: 100%;
+    height: 400px;
+    border: 2px solid #bbdefb;
+    border-radius: 12px;
+  }
+  
+  .form-group {
+    display: grid;
+    gap: 10px;
+  }
+  
+  @media (min-width: 600px) {
+    .form-row {
+      display: flex;
+      gap: 10px;
+    }
+  
+    .form-row input {
+      flex: 1;
+    }
+  }
+  
+  
+  table {
+    width: 100%; /* Ancho completo */
+    border-collapse: collapse; /* Colapsar bordes */
+    margin-top: 10px; /* Espaciado superior */
+  }
+  
+  th, td {
+    border: 1px solid #bbdefb; /* Bordes de la celda en azul claro */
+    padding: 8px; /* Espaciado interno */
+    text-align: left; /* Alinear texto a la izquierda */
+  }
+  
+  th {
+    background-color: #1976d2; /* Color de fondo azul para el encabezado */
+    color: white; /* Color de texto blanco para el encabezado */
+  }
+  
+  tr:nth-child(even) {
+    background-color: #e3f2fd; /* Color de fondo azul claro para filas pares */
+  }
+  
+  tr:hover {
+    background-color: #bbdefb; /* Efecto de hover en azul más claro */
+  }
+  
+  td {
+    background-color: white; /* Color de fondo blanco para las celdas */
+    color: #0a2b5c; /* Color de texto */
+  }
+  
