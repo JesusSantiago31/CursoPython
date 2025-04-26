@@ -1,0 +1,62 @@
+// Crear el mapa
+const map = L.map('map').setView([19.432854452264177, -99.13330004822943], 6); // Centrado en CDMX
+
+// Agregar un tile layer (capas del mapa)
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+// Ciudad y almacén (ejemplo de coordenadas, puedes agregar más)
+const ciudades = {
+    'EDO.MEX': [19.2938258568844, -99.65366252023884],
+    'QRO': [20.593537489366717, -100.39004057702225],
+    'CDMX': [19.432854452264177, -99.13330004822943],
+    'SLP': [22.151725492903953, -100.97657666103268],
+    'MTY': [25.673156272083876, -100.2974200019319],
+    'PUE': [19.063532268065185, -98.30729139446866],
+    'GDL': [20.67714565083998, -103.34696388920293],
+    'MICH': [19.702614895389996, -101.19228631929688],
+    'SON': [29.075273188617818, -110.95962477655333],
+};
+
+// Agregar marcadores para las ciudades
+for (const [ciudad, coord] of Object.entries(ciudades)) {
+    L.marker(coord).addTo(map)
+        .bindPopup(`<b>${ciudad}</b><br>${coord[0]}, ${coord[1]}`)
+        .openPopup();
+}
+
+// Manejo del formulario y cálculos
+const formulario = document.getElementById('formulario');
+const resultado = document.getElementById('resultado');
+
+formulario.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const datos = Object.fromEntries(new FormData(formulario));
+    const res = await fetch('/api/vrp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(datos)
+    });
+
+    const json = await res.json();
+    resultado.innerHTML = '';
+
+    if (json.rutas) {
+        json.rutas.forEach((ruta, i) => {
+            resultado.innerHTML += `
+                <div class="card">
+                    <h3>Ruta ${i + 1}</h3>
+                    <p><strong>Clientes:</strong> ${ruta.clientes.join(', ')}</p>
+                    <p><strong>Carga total:</strong> ${ruta.carga_total} kg</p>
+                    <p><strong>Consumo:</strong> ${ruta.consumo_litros.toFixed(2)} L</p>
+                    <p><strong>Costo combustible:</strong> $${ruta.costo_combustible.toFixed(2)}</p>
+                    <p><strong>Distancia:</strong> ${ruta.distancia_total.toFixed(2)} km</p>
+                    <p><strong>Tiempo estimado:</strong> ${ruta.tiempo_estimado.toFixed(2)} h</p>
+                </div>
+            `;
+        });
+    } else {
+        resultado.innerHTML = '<p>Error al calcular rutas.</p>';
+    }
+});
