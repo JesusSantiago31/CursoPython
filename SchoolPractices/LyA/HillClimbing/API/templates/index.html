@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Hill Climbing TSP</title>
+    <link rel="stylesheet" href="../static/styles.css">
+
+    <script>
+        function agregarCiudad() {
+            const nombre = document.getElementById('nombre').value.trim();
+            const latitud = document.getElementById('latitud').value.trim();
+            const longitud = document.getElementById('longitud').value.trim();
+
+            if (nombre === '' || latitud === '' || longitud === '') {
+                alert('Por favor llena todos los campos');
+                return;
+            }
+
+            const lista = document.getElementById('ciudades');
+            const entrada = document.createElement('input');
+            entrada.type = 'hidden';
+            entrada.name = 'ciudades';
+            entrada.value = `${nombre},${latitud},${longitud}`;
+            lista.appendChild(entrada);
+
+            const tabla = document.getElementById('tablaCiudades');
+            const fila = document.createElement('tr');
+            fila.innerHTML = `<td>${nombre}</td><td>${latitud}</td><td>${longitud}</td>`;
+            tabla.appendChild(fila);
+
+            // Limpia los campos
+            document.getElementById('nombre').value = '';
+            document.getElementById('latitud').value = '';
+            document.getElementById('longitud').value = '';
+        }
+    </script>
+</head>
+<body>
+
+<h1>Hill Climbing - TSP</h1>
+
+<div class="contenedor">
+    <!-- Ejecutar Fijo -->
+    <div class="seccion">
+        <h2>Usar datos predeterminados</h2>
+        <form method="POST">
+            <button type="submit" name="ejecutar_fijo">Ejecutar Hill Climbing</button>
+        </form>
+        {% if resultado_fijo %}
+        <div class="resultado">
+            <h3>Resultado:</h3>
+            <p><strong>Ruta:</strong> {{ resultado_fijo.ruta }}</p>
+            <p><strong>Distancia Total:</strong> {{ resultado_fijo.distancia }}</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Ejecutar Personalizado -->
+    <div class="seccion">
+        <h2>Agregar rutas personalizadas</h2>
+        <form method="POST">
+            <input type="text" id="nombre" placeholder="Nombre de la ciudad">
+            <input type="text" id="latitud" placeholder="Latitud">
+            <input type="text" id="longitud" placeholder="Longitud">
+            <button type="button" onclick="agregarCiudad()">Agregar Ciudad</button>
+
+            <!-- Aquí vamos a poner las ciudades ya guardadas -->
+            <div id="ciudades">
+                {% for ciudad in ciudades_guardadas %}
+                    <input type="hidden" name="ciudades" value="{{ ciudad }}">
+                {% endfor %}
+            </div>
+
+            <h3>Ciudades agregadas:</h3>
+            <table>
+                <thead>
+                    <tr><th>Nombre</th><th>Latitud</th><th>Longitud</th></tr>
+                </thead>
+                <tbody id="tablaCiudades">
+                    {% for ciudad in ciudades_guardadas %}
+                        {% set partes = ciudad.split(",") %}
+                        <tr>
+                            <td>{{ partes[0] }}</td>
+                            <td>{{ partes[1] }}</td>
+                            <td>{{ partes[2] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <button type="submit" name="ejecutar_personalizado">Ejecutar Hill Climbing Personalizado</button>
+        </form>
+
+        {% if resultado_personalizado %}
+        <div class="resultado">
+            {% if resultado_personalizado.error %}
+                <p><strong>Error:</strong> {{ resultado_personalizado.error }}</p>
+            {% else %}
+                <h3>Resultado:</h3>
+                <p><strong>Ruta:</strong> {{ resultado_personalizado.ruta }}</p>
+                <p><strong>Distancia Total:</strong> {{ resultado_personalizado.distancia }}</p>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+</body>
+</html>
