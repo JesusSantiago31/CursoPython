@@ -1,0 +1,101 @@
+/* Fondo general */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url('back.jpg');
+    
+    background-position: center;
+    
+
+    margin: 0;
+    padding: 40px;
+}
+
+/* Contenedor principal */
+.contenedor {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+/* Cada sección */
+.seccion {
+    background: rgba(183, 219, 245, 0.584);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    width: 45%;
+}
+
+/* Encabezados */
+h1{
+    color: white;
+}
+h2, h3 {
+    color: #333;
+}
+
+/* Botones */
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    margin-top: 15px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Inputs */
+input[type="text"] {
+    background-color: #81a5cc67;
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+/* Resultados */
+.resultado {
+    margin-top: 20px;
+    background: #e9f0f76b;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 5px solid #007bff;
+}
+
+/* Tabla de ciudades */
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+th, td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Cards individuales (para resultados personalizados) */
+.card {
+    background: rgba(255, 255, 255, 0.322);
+    padding: 20px;
+    margin-top: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Scroll para listas grandes */
+.ciudades-lista {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-top: 10px;
+}
